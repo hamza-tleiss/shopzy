@@ -29,17 +29,17 @@ export function CategoryPage() {
   }, [slug])
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-6 sm:py-8">
       <Link
         to="/categories"
-        className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-4"
+        className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-3 sm:mb-4"
       >
         <ArrowLeft className="size-4" /> All categories
       </Link>
-      <h1 className="text-2xl md:text-3xl font-bold capitalize">
+      <h1 className="text-xl sm:text-2xl md:text-3xl font-bold capitalize wrap-break-word">
         {slug?.replace(/-/g, " ")}
       </h1>
-      <p className="text-sm text-muted-foreground mt-1 mb-6">
+      <p className="text-xs sm:text-sm text-muted-foreground mt-1 mb-5 sm:mb-6">
         {loading ? "Loading…" : `${products.length} products`}
       </p>
 

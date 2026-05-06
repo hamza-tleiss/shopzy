@@ -50,11 +50,11 @@ export function ProductGrid({
   }
 
   return (
-    <div className={`grid ${cols} gap-4 md:gap-6`}>
+    <div className={`grid ${cols} gap-3 sm:gap-4 md:gap-6 items-stretch`}>
       {products.map((p, i) => (
         <div
           key={p.id}
-          className="animate-fade-up"
+          className="animate-fade-up h-full"
           style={{ animationDelay: `${Math.min(i, 12) * 40}ms` }}
         >
           <ProductCard product={p} />

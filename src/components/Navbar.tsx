@@ -22,6 +22,11 @@ const navLinks = [
   { to: "/categories", label: "Categories", end: false },
 ]
 
+const mobileExtraLinks = [
+  { to: "/wishlist", label: "Wishlist", end: false },
+  { to: "/cart", label: "Cart", end: false },
+]
+
 function DesktopNavLink({
   to,
   end,
@@ -155,21 +160,26 @@ export function Navbar() {
           : "bg-background/60 backdrop-blur-md border-transparent",
       )}
     >
-      <div className="container mx-auto flex h-16 items-center gap-4 px-4">
+      <div className="container mx-auto flex h-14 sm:h-16 items-center gap-2 sm:gap-4 px-3 sm:px-4">
         <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
           <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" className="md:hidden">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden -ml-1 shrink-0"
+              aria-label="Open menu"
+            >
               <Menu className="size-5" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-72">
+          <SheetContent side="left" className="w-[85vw] max-w-xs p-5 sm:p-6">
             <SheetHeader>
               <SheetTitle className="flex items-center gap-2">
                 <Store className="size-5 text-primary" /> Shopzy
               </SheetTitle>
             </SheetHeader>
             <nav className="mt-6 flex flex-col gap-1">
-              {navLinks.map((l) => (
+              {[...navLinks, ...mobileExtraLinks].map((l) => (
                 <MobileNavLink
                   key={l.to}
                   to={l.to}
@@ -194,11 +204,14 @@ export function Navbar() {
           </SheetContent>
         </Sheet>
 
-        <Link to="/" className="flex items-center gap-2 font-bold text-lg">
-          <span className="grid place-items-center size-8 rounded-lg bg-linear-to-br from-primary to-primary/70 text-primary-foreground shadow-sm">
-            <Store className="size-4" />
+        <Link
+          to="/"
+          className="flex items-center gap-2 font-bold text-base sm:text-lg shrink-0"
+        >
+          <span className="grid place-items-center size-7 sm:size-8 rounded-lg bg-linear-to-br from-primary to-primary/70 text-primary-foreground shadow-sm">
+            <Store className="size-3.5 sm:size-4" />
           </span>
-          <span className="hidden sm:inline tracking-tight">Shopzy</span>
+          <span className="tracking-tight">Shopzy</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-6 ml-6">
@@ -224,10 +237,15 @@ export function Navbar() {
           </div>
         </form>
 
-        <div className="ml-auto md:ml-0 flex items-center gap-1">
+        <div className="ml-auto md:ml-0 flex items-center gap-0.5 sm:gap-1 shrink-0">
           <ThemeToggle />
 
-          <Button variant="ghost" size="icon" asChild className="relative">
+          <Button
+            variant="ghost"
+            size="icon"
+            asChild
+            className="relative hidden sm:inline-flex"
+          >
             <Link to="/wishlist" aria-label="Wishlist" className="group">
               <Heart className="size-5 transition-transform group-hover:scale-110" />
               {wishlistCount > 0 && (
@@ -245,7 +263,7 @@ export function Navbar() {
             variant="ghost"
             size="icon"
             onClick={openCart}
-            className="relative group"
+            className="relative group -mr-1 sm:mr-0"
             aria-label="Open cart"
           >
             <ShoppingCart className="size-5 transition-transform group-hover:scale-110" />

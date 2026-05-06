@@ -22,7 +22,7 @@ export function ProductCard({ product }: ProductCardProps) {
     product.price * (1 - (product.discountPercentage ?? 0) / 100)
 
   return (
-    <Card className="group relative overflow-hidden p-0 border-border/70 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-primary/40">
+    <Card className="group relative flex h-full flex-col overflow-hidden p-0 border-border/70 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-primary/40">
       <div className="relative aspect-square overflow-hidden bg-muted">
         <Link to={`/product/${product.id}`} className="block size-full">
           <img
@@ -50,11 +50,12 @@ export function ProductCard({ product }: ProductCardProps) {
             toggleWishlist(product.id)
           }}
           className={cn(
-            "absolute right-2 top-2 grid place-items-center size-9 rounded-full bg-background/90 backdrop-blur-sm shadow-sm transition-all duration-300",
+            "absolute right-2 top-2 grid place-items-center size-8 sm:size-9 rounded-full bg-background/90 backdrop-blur-sm shadow-sm transition-all duration-300",
             "hover:bg-background hover:scale-110 active:scale-95",
+            // Always visible on touch devices; reveal on hover on desktop
             inWishlist
               ? "opacity-100"
-              : "opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0",
+              : "opacity-100 sm:opacity-0 sm:-translate-y-1 sm:group-hover:opacity-100 sm:group-hover:translate-y-0",
           )}
           aria-label={inWishlist ? "Remove from wishlist" : "Add to wishlist"}
         >
@@ -105,31 +106,31 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
       </div>
 
-      <div className="p-4 flex flex-col gap-2">
-        <div className="text-xs text-muted-foreground capitalize tracking-wide">
+      <div className="flex flex-1 flex-col gap-1.5 sm:gap-2 p-3 sm:p-4">
+        <div className="text-[11px] sm:text-xs text-muted-foreground capitalize tracking-wide truncate">
           {product.category}
         </div>
         <Link
           to={`/product/${product.id}`}
-          className="font-medium leading-tight line-clamp-2 transition-colors group-hover:text-primary"
+          className="text-sm sm:text-base font-medium leading-snug line-clamp-2 min-h-10 sm:min-h-11 transition-colors group-hover:text-primary"
         >
           {product.title}
         </Link>
 
-        <div className="flex items-center gap-1 text-xs">
-          <Star className="size-3.5 fill-yellow-400 text-yellow-400" />
+        <div className="flex items-center gap-1 text-[11px] sm:text-xs">
+          <Star className="size-3.5 fill-yellow-400 text-yellow-400 shrink-0" />
           <span className="font-medium">{product.rating?.toFixed(1)}</span>
           <span className="text-muted-foreground">
             ({product.reviews?.length ?? 0})
           </span>
         </div>
 
-        <div className="mt-1 flex items-end gap-2">
-          <span className="text-lg font-bold tracking-tight">
+        <div className="mt-auto flex flex-wrap items-end gap-x-2 gap-y-0.5 pt-1">
+          <span className="text-base sm:text-lg font-bold tracking-tight">
             {formatPrice(discounted)}
           </span>
           {product.discountPercentage > 0 && (
-            <span className="text-sm text-muted-foreground line-through">
+            <span className="text-xs sm:text-sm text-muted-foreground line-through">
               {formatPrice(product.price)}
             </span>
           )}
@@ -138,7 +139,7 @@ export function ProductCard({ product }: ProductCardProps) {
         <Button
           onClick={() => addItem(product)}
           disabled={product.stock === 0}
-          className="mt-2 w-full sm:hidden"
+          className="mt-1 w-full sm:hidden"
           size="sm"
         >
           <ShoppingCart className="size-4" />

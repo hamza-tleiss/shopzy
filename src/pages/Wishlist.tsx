@@ -39,13 +39,15 @@ export function Wishlist() {
 
   if (!loading && ids.length === 0) {
     return (
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 py-12 sm:py-16">
         <div className="max-w-md mx-auto text-center">
-          <div className="grid place-items-center size-20 rounded-full bg-muted mx-auto mb-4">
-            <Heart className="size-10 text-muted-foreground" />
+          <div className="grid place-items-center size-16 sm:size-20 rounded-full bg-muted mx-auto mb-4">
+            <Heart className="size-8 sm:size-10 text-muted-foreground" />
           </div>
-          <h1 className="text-2xl font-bold mb-2">Your wishlist is empty</h1>
-          <p className="text-muted-foreground mb-6">
+          <h1 className="text-xl sm:text-2xl font-bold mb-2">
+            Your wishlist is empty
+          </h1>
+          <p className="text-sm sm:text-base text-muted-foreground mb-6">
             Save items you love to find them here later.
           </p>
           <Button asChild size="lg">
@@ -57,16 +59,23 @@ export function Wishlist() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-2xl md:text-3xl font-bold">My wishlist</h1>
-          <p className="text-sm text-muted-foreground mt-1">
+    <div className="container mx-auto px-4 py-6 sm:py-8">
+      <div className="flex items-center justify-between gap-3 mb-5 sm:mb-6">
+        <div className="min-w-0">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
+            My wishlist
+          </h1>
+          <p className="text-xs sm:text-sm text-muted-foreground mt-1">
             {ids.length} saved items
           </p>
         </div>
         {ids.length > 0 && (
-          <Button variant="ghost" size="sm" onClick={clear}>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={clear}
+            className="shrink-0"
+          >
             Clear all
           </Button>
         )}

@@ -25,8 +25,8 @@ export function CartDrawer() {
   return (
     <Sheet open={isOpen} onOpenChange={(o) => !o && closeCart()}>
       <SheetContent className="flex w-full flex-col sm:max-w-md p-0">
-        <SheetHeader className="border-b p-6">
-          <SheetTitle className="flex items-center gap-2">
+        <SheetHeader className="border-b p-4 sm:p-6 pr-12">
+          <SheetTitle className="flex items-center gap-2 text-base sm:text-lg">
             <ShoppingBag className="size-5" />
             Your Cart ({totalItems})
           </SheetTitle>
@@ -47,7 +47,7 @@ export function CartDrawer() {
           </div>
         ) : (
           <>
-            <div className="flex-1 overflow-y-auto p-6 space-y-4">
+            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
               {items.map((item) => {
                 const lineTotal =
                   item.price *
@@ -63,7 +63,7 @@ export function CartDrawer() {
                       <img
                         src={item.thumbnail}
                         alt={item.title}
-                        className="size-20 rounded-md border object-cover bg-muted"
+                        className="size-16 sm:size-20 rounded-md border object-cover bg-muted"
                       />
                     </Link>
                     <div className="flex-1 min-w-0">
@@ -81,7 +81,7 @@ export function CartDrawer() {
                         each
                       </div>
 
-                      <div className="mt-2 flex items-center justify-between">
+                      <div className="mt-2 flex items-center justify-between gap-2">
                         <div className="flex items-center border rounded-md">
                           <Button
                             variant="ghost"
@@ -92,7 +92,7 @@ export function CartDrawer() {
                           >
                             <Minus className="size-3" />
                           </Button>
-                          <span className="w-8 text-center text-sm">
+                          <span className="w-7 sm:w-8 text-center text-sm">
                             {item.quantity}
                           </span>
                           <Button
@@ -115,7 +115,7 @@ export function CartDrawer() {
                       variant="ghost"
                       size="icon"
                       onClick={() => removeItem(item.id)}
-                      className="text-muted-foreground hover:text-destructive"
+                      className="text-muted-foreground hover:text-destructive shrink-0 size-8"
                       aria-label="Remove"
                     >
                       <Trash2 className="size-4" />
@@ -125,7 +125,7 @@ export function CartDrawer() {
               })}
             </div>
 
-            <div className="border-t p-6 space-y-4">
+            <div className="border-t p-4 sm:p-6 space-y-3 sm:space-y-4">
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">Subtotal</span>
                 <span className="font-semibold">{formatPrice(total)}</span>

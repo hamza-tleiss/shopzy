@@ -77,15 +77,15 @@ export function ProductDetail() {
   const images = product.images?.length ? product.images : [product.thumbnail]
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-6 sm:py-8">
       <Link
         to="/products"
-        className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-6"
+        className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-4 sm:mb-6"
       >
         <ArrowLeft className="size-4" /> Back to products
       </Link>
 
-      <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+      <div className="grid md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
         <div>
           <div className="aspect-square overflow-hidden rounded-xl border bg-muted">
             <img
@@ -95,7 +95,7 @@ export function ProductDetail() {
             />
           </div>
           {images.length > 1 && (
-            <div className="mt-3 grid grid-cols-5 gap-2">
+            <div className="mt-3 grid grid-cols-5 gap-1.5 sm:gap-2">
               {images.slice(0, 5).map((img, i) => (
                 <button
                   key={i}
@@ -118,23 +118,23 @@ export function ProductDetail() {
           <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
             <Link
               to={`/category/${product.category}`}
-              className="capitalize hover:text-foreground"
+              className="capitalize hover:text-foreground truncate"
             >
               {product.category}
             </Link>
             {product.brand && (
               <>
                 <span>•</span>
-                <span>{product.brand}</span>
+                <span className="truncate">{product.brand}</span>
               </>
             )}
           </div>
 
-          <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight wrap-break-word">
             {product.title}
           </h1>
 
-          <div className="flex items-center gap-3 mt-2">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-2">
             <div className="flex items-center gap-1">
               <Star className="size-4 fill-yellow-400 text-yellow-400" />
               <span className="text-sm font-medium">
@@ -144,7 +144,7 @@ export function ProductDetail() {
             <span className="text-sm text-muted-foreground">
               ({product.reviews?.length ?? 0} reviews)
             </span>
-            <Separator orientation="vertical" className="h-4" />
+            <Separator orientation="vertical" className="h-4 hidden sm:block" />
             <span
               className={cn(
                 "text-sm",
@@ -157,11 +157,13 @@ export function ProductDetail() {
             </span>
           </div>
 
-          <div className="mt-5 flex items-end gap-3">
-            <span className="text-3xl font-bold">{formatPrice(discounted)}</span>
+          <div className="mt-4 sm:mt-5 flex flex-wrap items-end gap-x-3 gap-y-2">
+            <span className="text-2xl sm:text-3xl font-bold">
+              {formatPrice(discounted)}
+            </span>
             {product.discountPercentage > 0 && (
               <>
-                <span className="text-lg text-muted-foreground line-through">
+                <span className="text-base sm:text-lg text-muted-foreground line-through">
                   {formatPrice(product.price)}
                 </span>
                 <Badge variant="destructive">
@@ -171,45 +173,38 @@ export function ProductDetail() {
             )}
           </div>
 
-          <p className="mt-5 text-sm text-muted-foreground leading-relaxed">
+          <p className="mt-4 sm:mt-5 text-sm text-muted-foreground leading-relaxed">
             {product.description}
           </p>
 
-          <div className="mt-6 flex flex-wrap items-center gap-3">
+          <div className="mt-5 sm:mt-6 flex flex-wrap items-center gap-2 sm:gap-3">
             <div className="flex items-center border rounded-md">
               <Button
                 variant="ghost"
                 size="icon"
                 className="h-10 rounded-none"
                 onClick={() => setQty((q) => Math.max(1, q - 1))}
+                aria-label="Decrease quantity"
               >
                 <Minus className="size-4" />
               </Button>
-              <span className="w-12 text-center font-medium">{qty}</span>
+              <span className="w-10 sm:w-12 text-center font-medium">{qty}</span>
               <Button
                 variant="ghost"
                 size="icon"
                 className="h-10 rounded-none"
                 onClick={() => setQty((q) => Math.min(product.stock, q + 1))}
                 disabled={qty >= product.stock}
+                aria-label="Increase quantity"
               >
                 <Plus className="size-4" />
               </Button>
             </div>
             <Button
               size="lg"
-              onClick={() => addItem(product, qty)}
-              disabled={product.stock === 0}
-              className="flex-1 min-w-[180px]"
-            >
-              <ShoppingCart className="size-4" />
-              Add to cart
-            </Button>
-            <Button
-              size="lg"
               variant="outline"
               onClick={() => toggleWishlist(product.id)}
-              className="aspect-square px-0"
+              className="aspect-square px-0 h-10 w-10 sm:h-10 sm:w-10"
               aria-label="Toggle wishlist"
             >
               <Heart
@@ -219,32 +214,41 @@ export function ProductDetail() {
                 )}
               />
             </Button>
+            <Button
+              size="lg"
+              onClick={() => addItem(product, qty)}
+              disabled={product.stock === 0}
+              className="flex-1 basis-full sm:basis-auto sm:min-w-45"
+            >
+              <ShoppingCart className="size-4" />
+              Add to cart
+            </Button>
           </div>
 
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div className="flex items-start gap-2 rounded-lg border p-3">
               <Truck className="size-4 text-primary shrink-0 mt-0.5" />
-              <div className="text-xs">
+              <div className="text-xs min-w-0">
                 <div className="font-semibold">Free shipping</div>
-                <div className="text-muted-foreground">
+                <div className="text-muted-foreground line-clamp-2">
                   {product.shippingInformation || "On orders over $50"}
                 </div>
               </div>
             </div>
             <div className="flex items-start gap-2 rounded-lg border p-3">
               <ShieldCheck className="size-4 text-primary shrink-0 mt-0.5" />
-              <div className="text-xs">
+              <div className="text-xs min-w-0">
                 <div className="font-semibold">Warranty</div>
-                <div className="text-muted-foreground">
+                <div className="text-muted-foreground line-clamp-2">
                   {product.warrantyInformation || "1 year warranty"}
                 </div>
               </div>
             </div>
             <div className="flex items-start gap-2 rounded-lg border p-3">
               <Package className="size-4 text-primary shrink-0 mt-0.5" />
-              <div className="text-xs">
+              <div className="text-xs min-w-0">
                 <div className="font-semibold">Returns</div>
-                <div className="text-muted-foreground">
+                <div className="text-muted-foreground line-clamp-2">
                   {product.returnPolicy || "30-day returns"}
                 </div>
               </div>

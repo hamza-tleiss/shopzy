@@ -89,21 +89,25 @@ export function Products() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
-        <div>
-          <h1 className="text-2xl md:text-3xl font-bold">
+    <div className="container mx-auto px-4 py-6 sm:py-8">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 mb-5 sm:mb-6">
+        <div className="min-w-0">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold truncate">
             {query ? `Search: "${query}"` : "All products"}
           </h1>
-          <p className="text-sm text-muted-foreground mt-1">
+          <p className="text-xs sm:text-sm text-muted-foreground mt-1">
             {loading ? "Loading…" : `${total} products`}
           </p>
         </div>
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline">
-              Sort: {sort.label} <ChevronDown className="size-4" />
+            <Button variant="outline" className="w-full sm:w-auto justify-between sm:justify-center">
+              <span className="truncate">
+                <span className="hidden sm:inline">Sort: </span>
+                {sort.label}
+              </span>
+              <ChevronDown className="size-4 shrink-0" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56">
@@ -121,7 +125,7 @@ export function Products() {
       <ProductGrid products={products} loading={loading} />
 
       {totalPages > 1 && !loading && (
-        <div className="mt-10 flex justify-center items-center gap-2">
+        <div className="mt-8 sm:mt-10 flex justify-center items-center gap-2">
           <Button
             variant="outline"
             size="sm"
@@ -130,7 +134,7 @@ export function Products() {
           >
             Previous
           </Button>
-          <span className="text-sm text-muted-foreground px-3">
+          <span className="text-xs sm:text-sm text-muted-foreground px-2 sm:px-3 whitespace-nowrap">
             Page {page} of {totalPages}
           </span>
           <Button

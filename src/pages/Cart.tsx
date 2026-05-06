@@ -40,17 +40,25 @@ export function Cart() {
   const grandTotal = total + shipping + tax
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl md:text-3xl font-bold">Shopping cart</h1>
-        <Button variant="ghost" size="sm" onClick={clearCart}>
+    <div className="container mx-auto px-4 py-6 sm:py-8">
+      <div className="flex items-center justify-between gap-3 mb-5 sm:mb-6">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
+          Shopping cart
+        </h1>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={clearCart}
+          className="shrink-0"
+        >
           <Trash2 className="size-4" />
-          Clear cart
+          <span className="hidden sm:inline">Clear cart</span>
+          <span className="sm:hidden">Clear</span>
         </Button>
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-4">
+      <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="lg:col-span-2 space-y-3 sm:space-y-4">
           {items.map((item) => {
             const linePrice =
               item.price * (1 - item.discountPercentage / 100)
@@ -58,62 +66,64 @@ export function Cart() {
             return (
               <div
                 key={item.id}
-                className="flex gap-4 rounded-lg border bg-card p-4"
+                className="flex gap-3 sm:gap-4 rounded-lg border bg-card p-3 sm:p-4"
               >
                 <Link to={`/product/${item.id}`} className="shrink-0">
                   <img
                     src={item.thumbnail}
                     alt={item.title}
-                    className="size-24 sm:size-28 rounded-md border object-cover bg-muted"
+                    className="size-20 sm:size-28 rounded-md border object-cover bg-muted"
                   />
                 </Link>
                 <div className="flex-1 min-w-0">
                   <Link
                     to={`/product/${item.id}`}
-                    className="font-medium line-clamp-2 hover:underline"
+                    className="text-sm sm:text-base font-medium line-clamp-2 hover:underline"
                   >
                     {item.title}
                   </Link>
-                  <div className="text-sm text-muted-foreground mt-1">
-                    {formatPrice(linePrice)} each
+                  <div className="text-xs sm:text-sm text-muted-foreground mt-1 flex flex-wrap gap-x-2">
+                    <span>{formatPrice(linePrice)} each</span>
                     {item.discountPercentage > 0 && (
-                      <span className="ml-2 line-through">
+                      <span className="line-through">
                         {formatPrice(item.price)}
                       </span>
                     )}
                   </div>
-                  <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+                  <div className="mt-2 sm:mt-3 flex flex-wrap items-center justify-between gap-2 sm:gap-3">
                     <div className="flex items-center border rounded-md">
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-8 rounded-none"
+                        className="size-8 rounded-none"
                         onClick={() => decrement(item.id)}
+                        aria-label="Decrease"
                       >
                         <Minus className="size-3.5" />
                       </Button>
-                      <span className="w-10 text-center text-sm">
+                      <span className="w-8 sm:w-10 text-center text-sm">
                         {item.quantity}
                       </span>
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-8 rounded-none"
+                        className="size-8 rounded-none"
                         onClick={() => increment(item.id)}
                         disabled={item.quantity >= item.stock}
+                        aria-label="Increase"
                       >
                         <Plus className="size-3.5" />
                       </Button>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <span className="font-semibold">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <span className="font-semibold text-sm sm:text-base">
                         {formatPrice(lineTotal)}
                       </span>
                       <Button
                         variant="ghost"
                         size="icon"
                         onClick={() => removeItem(item.id)}
-                        className="text-muted-foreground hover:text-destructive"
+                        className="text-muted-foreground hover:text-destructive size-8 sm:size-9"
                         aria-label="Remove"
                       >
                         <Trash2 className="size-4" />
@@ -127,7 +137,7 @@ export function Cart() {
         </div>
 
         <aside className="lg:col-span-1">
-          <div className="rounded-lg border bg-card p-6 sticky top-20">
+          <div className="rounded-lg border bg-card p-4 sm:p-6 lg:sticky lg:top-20">
             <h2 className="font-semibold text-lg mb-4">Order summary</h2>
 
             <div className="space-y-2 text-sm">

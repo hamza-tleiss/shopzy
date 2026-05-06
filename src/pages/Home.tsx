@@ -57,9 +57,9 @@ export function Home() {
       <section className="relative overflow-hidden">
         {/* animated gradient blobs */}
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute -top-40 -left-32 size-112 rounded-full bg-primary/15 blur-3xl animate-float-slow" />
-          <div className="absolute top-32 -right-24 size-104 rounded-full bg-violet-500/15 blur-3xl animate-float-slower" />
-          <div className="absolute bottom-0 left-1/3 size-80 rounded-full bg-sky-400/10 blur-3xl animate-float-slow" />
+          <div className="absolute -top-40 -left-32 size-72 sm:size-96 md:size-112 rounded-full bg-primary/15 blur-3xl animate-float-slow" />
+          <div className="absolute top-32 -right-24 size-72 sm:size-96 md:size-104 rounded-full bg-violet-500/15 blur-3xl animate-float-slower" />
+          <div className="absolute bottom-0 left-1/3 size-56 sm:size-72 md:size-80 rounded-full bg-sky-400/10 blur-3xl animate-float-slow" />
           {/* subtle grid */}
           <div
             className="absolute inset-0 opacity-[0.04]"
@@ -71,24 +71,24 @@ export function Home() {
           />
         </div>
 
-        <div className="container mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
+        <div className="container mx-auto px-4 py-10 sm:py-16 md:py-24 grid md:grid-cols-2 gap-8 md:gap-10 items-center">
           <div className="animate-fade-up">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/10 text-primary px-3 py-1 text-xs font-semibold mb-4 backdrop-blur-sm">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/10 text-primary px-3 py-1 text-[11px] sm:text-xs font-semibold mb-3 sm:mb-4 backdrop-blur-sm">
               <Sparkles className="size-3.5" />
               New season • New deals
             </span>
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4 bg-linear-to-br from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight mb-3 sm:mb-4 bg-linear-to-br from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
               Shop the best products at unbeatable prices
             </h1>
-            <p className="text-muted-foreground text-base md:text-lg mb-6 max-w-md leading-relaxed">
+            <p className="text-muted-foreground text-sm sm:text-base md:text-lg mb-5 sm:mb-6 max-w-md leading-relaxed">
               Discover thousands of products across every category. Quality you
               can trust, delivered fast to your door.
             </p>
             <div className="flex flex-wrap gap-3">
               <Button
                 asChild
-                size="xl"
-                className="shadow-lg shadow-primary/20 hover:shadow-primary/30 hover:-translate-y-0.5 transition-all"
+                size="lg"
+                className="sm:h-12 sm:px-8 sm:text-base sm:rounded-lg shadow-lg shadow-primary/20 hover:shadow-primary/30 hover:-translate-y-0.5 transition-all"
               >
                 <Link to="/products">
                   Shop now <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
@@ -97,8 +97,8 @@ export function Home() {
               <Button
                 asChild
                 variant="outline"
-                size="xl"
-                className="hover:-translate-y-0.5 transition-transform"
+                size="lg"
+                className="sm:h-12 sm:px-8 sm:text-base sm:rounded-lg hover:-translate-y-0.5 transition-transform"
               >
                 <Link to="/categories">Browse categories</Link>
               </Button>
@@ -142,20 +142,24 @@ export function Home() {
       </section>
 
       {/* Features ───────────────────────────────── */}
-      <section className="container mx-auto px-4 py-10 md:py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <section className="container mx-auto px-4 py-8 sm:py-10 md:py-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
           {features.map((f, i) => (
             <div
               key={f.title}
-              className="group flex items-center gap-3 rounded-lg border bg-card p-4 transition-all duration-300 hover:border-primary/40 hover:shadow-md hover:-translate-y-0.5 animate-fade-up"
+              className="group flex items-center gap-2.5 sm:gap-3 rounded-lg border bg-card p-3 sm:p-4 transition-all duration-300 hover:border-primary/40 hover:shadow-md hover:-translate-y-0.5 animate-fade-up"
               style={{ animationDelay: `${i * 60}ms` }}
             >
-              <div className="grid place-items-center size-10 rounded-full bg-primary/10 text-primary shrink-0 transition-transform group-hover:scale-110 group-hover:rotate-6">
-                <f.icon className="size-5" />
+              <div className="grid place-items-center size-9 sm:size-10 rounded-full bg-primary/10 text-primary shrink-0 transition-transform group-hover:scale-110 group-hover:rotate-6">
+                <f.icon className="size-4 sm:size-5" />
               </div>
-              <div>
-                <div className="font-semibold text-sm">{f.title}</div>
-                <div className="text-xs text-muted-foreground">{f.desc}</div>
+              <div className="min-w-0">
+                <div className="font-semibold text-xs sm:text-sm truncate">
+                  {f.title}
+                </div>
+                <div className="text-[11px] sm:text-xs text-muted-foreground truncate">
+                  {f.desc}
+                </div>
               </div>
             </div>
           ))}
@@ -163,24 +167,24 @@ export function Home() {
       </section>
 
       {/* Categories ─────────────────────────────── */}
-      <section className="container mx-auto px-4 py-10 md:py-12">
-        <div className="flex items-end justify-between mb-6">
-          <div>
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight">
+      <section className="container mx-auto px-4 py-8 sm:py-10 md:py-12">
+        <div className="flex items-end justify-between gap-3 mb-5 sm:mb-6">
+          <div className="min-w-0">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight">
               Shop by category
             </h2>
-            <p className="text-muted-foreground text-sm mt-1">
+            <p className="text-muted-foreground text-xs sm:text-sm mt-1">
               Find what you need in our curated categories.
             </p>
           </div>
-          <Button asChild variant="ghost" size="sm" className="group">
+          <Button asChild variant="ghost" size="sm" className="group shrink-0">
             <Link to="/categories">
               See all{" "}
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </Button>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
           {categories.map((c, i) => {
             const { Icon, iconClass, bgClass, glowClass } = getCategoryStyle(
               c.slug,
@@ -189,7 +193,7 @@ export function Home() {
               <Link
                 key={c.slug}
                 to={`/category/${c.slug}`}
-                className="group relative overflow-hidden rounded-xl border bg-card p-5 hover:border-primary/40 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 animate-fade-up"
+                className="group relative overflow-hidden rounded-xl border bg-card p-3 sm:p-5 hover:border-primary/40 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 animate-fade-up"
                 style={{ animationDelay: `${i * 40}ms` }}
               >
                 <div
@@ -198,20 +202,20 @@ export function Home() {
                     glowClass,
                   )}
                 />
-                <div className="relative flex items-center gap-3">
+                <div className="relative flex items-center gap-2.5 sm:gap-3">
                   <div
                     className={cn(
-                      "grid place-items-center size-12 rounded-xl shrink-0 transition-transform duration-300 group-hover:scale-110",
+                      "grid place-items-center size-10 sm:size-12 rounded-xl shrink-0 transition-transform duration-300 group-hover:scale-110",
                       bgClass,
                     )}
                   >
-                    <Icon className={cn("size-6", iconClass)} />
+                    <Icon className={cn("size-5 sm:size-6", iconClass)} />
                   </div>
                   <div className="min-w-0">
-                    <div className="font-semibold capitalize leading-tight truncate">
+                    <div className="font-semibold capitalize leading-tight truncate text-sm sm:text-base">
                       {c.name}
                     </div>
-                    <div className="text-xs text-muted-foreground mt-1 flex items-center gap-1 group-hover:text-primary transition-colors">
+                    <div className="text-[11px] sm:text-xs text-muted-foreground mt-0.5 sm:mt-1 flex items-center gap-1 group-hover:text-primary transition-colors">
                       Shop now{" "}
                       <ArrowRight className="size-3 transition-transform group-hover:translate-x-0.5" />
                     </div>
@@ -224,17 +228,17 @@ export function Home() {
       </section>
 
       {/* Top rated ──────────────────────────────── */}
-      <section className="container mx-auto px-4 py-10 md:py-12">
-        <div className="flex items-end justify-between mb-6">
-          <div>
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight">
+      <section className="container mx-auto px-4 py-8 sm:py-10 md:py-12">
+        <div className="flex items-end justify-between gap-3 mb-5 sm:mb-6">
+          <div className="min-w-0">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight">
               Top rated
             </h2>
-            <p className="text-muted-foreground text-sm mt-1">
+            <p className="text-muted-foreground text-xs sm:text-sm mt-1">
               The products our customers love the most.
             </p>
           </div>
-          <Button asChild variant="ghost" size="sm" className="group">
+          <Button asChild variant="ghost" size="sm" className="group shrink-0">
             <Link to="/products">
               View all{" "}
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
