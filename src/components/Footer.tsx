@@ -93,7 +93,14 @@ export function Footer() {
           <p>© {new Date().getFullYear()} Shopzy. All rights reserved.</p>
           <p>
             Powered by{" "}
-            <span className="font-semibold text-foreground">Hamza Tleiss</span>
+            <a
+              href="https://hamzatleiss.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-foreground hover:underline"
+            >
+              Hamza Tleiss
+            </a>
           </p>
         </div>
       </div>
